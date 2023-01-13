@@ -631,3 +631,4 @@ int raizes(float A, float B, float C, float *X1, float *X2) {
     return 2;
   }
 }
+ 
