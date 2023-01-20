@@ -1,0 +1,398 @@
+//2
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int *vet, n, i;
+    printf("Digite o tamanho da vetor: \n");
+    scanf("%d",&n);
+    vet = (int *)malloc(sizeof(int)*n);
+    printf("Digite os valores da vetor: \n");
+    for(i = 0; i < n; i++){
+        scanf("%d",&vet[i]);
+    }
+    printf("Valores digitados: \n");
+    for(i = 0; i < n; i++){
+        if(i == n - 1){
+            printf("%d\n",*(vet + i));
+        }else{
+            printf("%d/",*(vet + i));
+        }
+    }
+    free(vet);
+    vet = NULL;
+    system("pause");
+    return 0;
+}
+
+-------------------------------------------------------------
+
+//4
+
+#include <stdio.h>
+
+int main(void) {
+    char *p; 
+    int i, n;
+    printf("Digite o tamanho da string: ");
+    scanf("%d", &n);
+    p = (char *) malloc(n * sizeof(char));
+    for (i = 0; i < n; i++) {
+        printf("Digite um caractere: ");
+        scanf("%c", &p[i]);
+    }
+    for (i = 0; i < n; i++) {
+        if (p[i] != 'a' && p[i] != 'e' && p[i] != 'i' && p[i] != 'o' && p[i] != 'u') {
+            printf("%c", p[i]);
+        }
+    }
+    free(p);
+    return 0;
+}
+
+--------------------------------------------------------------------------------
+
+//6
+
+#include <stdio.h>
+
+int main(void) {
+    int *p, i, n, op, pos, val;
+    printf("Digite o tamanho da memória: ");
+    scanf("%d", &n);
+    p = (int *) malloc(n * sizeof(int));
+    for (i = 0; i < n; i++) {
+        p[i] = 0;
+    }
+    do {
+        printf("1 - Inserir valor\n");
+        printf("2 - Consultar valor\n");
+        printf("3 - Sair\n");
+        printf("Digite a opção desejada: ");
+        scanf("%d", &op);
+        switch (op) {
+            case 1:
+                printf("Digite a posição: ");
+                scanf("%d", &pos);
+                printf("Digite o valor: ");
+                scanf("%d", &val);
+                p[pos] = val;
+                break;
+            case 2:
+                printf("Digite a posição: ");
+                scanf("%d", &pos);
+                printf("Valor: %d\n", p[pos]);
+                break;
+            case 3:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida!\n");
+        }
+    } while (op != 3);
+    free(p);
+    return 0;
+}
+
+-----------------------------------------------------------------------
+
+//8
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int *vet;
+    int n = 1500, i, j;
+    vet = (int *)calloc(n,sizeof(int));
+    fflush(stdin);
+    for(i = 0; i < n; i++){
+        if(vet[i] != 0){
+            j = 1;
+        }
+    }
+    if(j == 1){
+        printf("O vetor possui numeros diferentes de zero!\n");
+    }else{
+        printf("O vetor possui apenas zeros!\n");
+    }
+    for(i = 0; i < n; i++){
+        vet[i] = i;
+    }
+    printf("10 primeiros valores do vetor: \n");
+    for(i = 0;i < 10; i++){
+        if(i != 9){
+            printf("%d/",vet[i]);
+        }else{
+            printf("%d\n",vet[i]);
+        }
+    }
+    printf("10 ultimos valores do vetor: \n");
+    for(i = 1489;i < n; i++){
+        if(i != 1499){
+            printf("%d/",vet[i]);
+        }else{
+            printf("%d\n",vet[i]);
+        }
+    }
+    free(vet);
+    vet = NULL;
+    system("pause");
+    return 0;
+}
+
+---------------------------------------------------------------
+
+//10
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    double *vet;
+    int n, i;
+    do{
+        printf("Digite o tamanho do vetor sendo maior ou igual a 10: \n");
+        scanf("%d",&n);
+    }while(n < 10);
+    vet = (double*)malloc(sizeof(double)*n);
+    fflush(stdin);
+    srand(time(NULL));
+    printf("Valores aleatorios das 10 primeiras casas: \n");
+    for(i = 0; i < 10; i++){
+        vet[i] = rand()%100;
+        vet[i] = ((double)rand() * 100 ) / (double)RAND_MAX;
+        if(i != 9){
+            printf("%f/",vet[i]);
+        }else{
+            printf("%f\n",vet[i]);
+        }
+    }
+    free(vet);
+    vet = NULL;
+    system("pause");
+    return 0;
+}
+
+--------------------------------------------------------------
+
+//12
+
+#include <stdio.h>
+
+typedef struct
+{
+  int codigo;
+  char nome[50];
+  int quantidade;
+  float preco;
+} Produto;
+
+int main(void)
+{
+  Produto *p;
+  int i, n, maior_preco, maior_quantidade;
+  printf("Digite o número de produtos: ");
+  scanf("%d", &n);
+  p = (Produto *)malloc(n * sizeof(Produto));
+  for (i = 0; i < n; i++)
+  {
+    printf("Digite o código do produto: ");
+    scanf("%d", &p[i].codigo);
+    printf("Digite o nome do produto: ");
+    scanf("%s", p[i].nome);
+    printf("Digite a quantidade do produto: ");
+    scanf("%d", &p[i].quantidade);
+    printf("Digite o preço do produto: ");
+    scanf("%f", &p[i].preco);
+  }
+  maior_preco = 0;
+  for (i = 0; i < n; i++)
+  {
+    if (p[i].preco > p[maior_preco].preco)
+    {
+      maior_preco = i;
+    }
+  }
+  maior_quantidade = 0;
+  for (i = 0; i < n; i++)
+  {
+    if (p[i].quantidade > p[maior_quantidade].quantidade)
+    {
+      maior_quantidade = i;
+    }
+  }
+  printf("Produto com maior preço: %s - Preço: %.2f - Quantidade: %d\n", p[maior_preco].nome, p[maior_preco].preco, p[maior_preco].quantidade);
+
+  printf("Produto com maior quantidade: %s - Preço: %.2f - Quantidade: %d\n", p[maior_quantidade].nome, p[maior_quantidade].preco, p[maior_quantidade].quantidade);
+
+  free(p);
+  return 0;
+}
+
+------------------------------------------------------------------------
+
+//14
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+  int i, j;
+  float **matriz;
+  int linha, coluna;
+  printf("Digite o numero de linhas e colunas em ordem que tera sua matriz: \n");
+  scanf("%d %d",&linha,&coluna);
+  matriz = malloc(sizeof(float)*linha);
+  for(i = 0; i < linha; i++){
+    matriz[i] = malloc(sizeof(float)*coluna);
+  }
+  printf("Digite os valores reais para cada espaco da matriz: \n");
+  for(i = 0;i < linha; i++){
+    for(j = 0; j < coluna; j++){
+      printf("%d°linha, %d°coluna : \n",i,j);
+      scanf("%f",&matriz[i][j]);
+    }
+  }
+  for(i = 0;i < linha; i++){
+    for(j = 0; j < coluna; j++){
+      if(matriz[i][j] >= 10){
+        if(matriz[i][j] >= 100){
+          printf("%f ",matriz[i][j]);
+        }else{
+          printf("%f  ",matriz[i][j]);
+        }
+      }else{
+        printf("%f   ",matriz[i][j]);
+      }
+    }
+    printf("\n");
+  }
+  for (i=0; i < linha; i++){
+    free(matriz[i]);
+  }
+  matriz = NULL;
+  system("pause");
+  return 0;7
+}
+
+------------------------------------------------------------
+
+//16
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Produto{
+  char nome[30];
+  int codigo;
+  float preco;
+};
+
+int main()
+{
+  char *vet;
+  int **matriz1;
+  int i, j;
+  struct Produto *p;
+  char **matriz2;
+  vet = malloc(1024);
+  matriz1 = malloc(sizeof(int)*10);
+  matriz2 = malloc(sizeof(char)*100);
+  p = malloc(sizeof(struct Produto)*50);
+  for(i = 0; i < 10; i++){
+    matriz1[i] = malloc(sizeof(int)*10);
+  }
+  for(i = 0; i < 100; i++){
+    matriz2[i] = malloc(sizeof(char)*80);
+  }
+  for(i = 0; i < 10; i++){
+    free(matriz1[i]);
+  }
+  free(matriz1);
+  for(i = 0; i < 100; i++){
+    free(matriz2[i]);
+  }
+  free(matriz2);
+  system("pause");
+  return 0;
+}
+
+
+------------------------------------------------------------
+
+//18
+
+#include <stdio.h>
+
+int main(void)
+{
+  int *p, i, j, cont = 0;
+  char *texto;
+  struct
+  {
+    char nome[30];
+    int codigo;
+    float preco;
+  } *produto;
+  p = (int *)calloc(1024, sizeof(int));
+  for (i = 0; i < 10; i++)
+  {
+    for (j = 0; j < 10; j++)
+    {
+      p[i * 10 + j] = i * 10 + j;
+    }
+  }
+  for (i = 0; i < 10; i++)
+  {
+    for (j = 0; j < 10; j++)
+    {
+      printf("%d ", p[i * 10 + j]);
+    }
+    printf("\n");
+  }
+  produto = (struct {
+    char nome[30];
+    int codigo;
+    float preco;
+  } *)malloc(50 * sizeof(struct {
+               char nome[30];
+               int codigo;
+               float preco;
+             }));
+  for (i = 0; i < 50; i++)
+  {
+    printf("Digite o nome do produto: ");
+    scanf("%s", produto[i].nome);
+    printf("Digite o código do produto: ");
+    scanf("%d", &produto[i].codigo);
+    printf("Digite o preço do produto: ");
+    scanf("%f", &produto[i].preco);
+  }
+  for (i = 0; i < 50; i++)
+  {
+    printf("Nome: %s - Código: %d - Preço: %.2f\n", produto[i].nome, produto[i].codigo, produto[i].preco);
+  }
+  texto = (char *)malloc(100 * 80 * sizeof(char));
+  for (i = 0; i < 100; i++)
+  {
+    printf("Digite a linha %d: ", i + 1);
+    scanf("%s", &texto[i * 80]);
+  }
+  for (i = 0; i < 100; i++)
+  {
+    printf("%s\n", &texto[i * 80]);
+  }
+  free(p);
+  free(produto);
+  free(texto);
+  return 0;
+}
