@@ -1,0 +1,154 @@
+------------------------------------------
+              lab 11
+-------------------------------------------
+
+//5
+
+#include <stdio.h>
+
+int main()
+{
+  char filename[100];
+  char c;
+  printf("Informe o nome do arquivo: ");
+  scanf("%s", filename);
+  printf("Informe o caractere: ");
+  scanf(" %c", &c);
+  FILE *file = fopen(filename, "r");
+  if (file == NULL)
+  {
+    printf("Erro ao abrir o arquivo %s", filename);
+    return 1;
+  }
+  int count = 0;
+  char ch;
+  while ((ch = fgetc(file)) != EOF)
+  {
+    if (ch == c)
+    {
+      count++;
+    }
+  }
+  printf("O caractere %c ocorre %d vezes no arquivo %s", c, count, filename);
+  fclose(file);
+  return 0;
+}
+
+-----------------------------------------------------------------------------------------
+
+//10
+
+#include <stdio.h>
+
+int main()
+{
+  char filename[100];
+  char c;
+  printf("Informe o nome do arquivo: ");
+  scanf("%s", filename);
+  printf("Informe o caractere: ");
+  scanf(" %c", &c);
+  FILE *file = fopen(filename, "r");
+  if (file == NULL)
+  {
+    printf("Erro ao abrir o arquivo %s", filename);
+    return 1;
+  }
+  int count = 0;
+  char ch;
+  while ((ch = fgetc(file)) != EOF)
+  {
+    if (ch == c)
+    {
+      count++;
+    }
+  }
+  printf("O caractere %c ocorre %d vezes no arquivo %s", c, count, filename);
+  fclose(file);
+  return 0;
+}
+-------------------------------------------------------------------------------------------
+
+//15
+
+#include <stdio.h>
+
+int main(void)
+{
+  int n, i;
+  char *p, *p2;
+  FILE *arq;
+  printf("Digite o número de alunos: ");
+  scanf("%d", &n);
+  p = (char *)malloc(n * 40 * sizeof(char));
+  p2 = (char *)malloc(n * sizeof(char));
+  arq = fopen("alunos.txt", "w");
+  for (i = 0; i < n; i++)
+  {
+    printf("Digite o nome do aluno: ");
+    scanf("%s", &p[i * 40]);
+    printf("Digite a nota do aluno: ");
+    scanf("%s", &p2[i]);
+  }
+  for (i = 0; i < n; i++)
+  {
+    fprintf(arq, "%s %s", &p[i * 40], &p2[i]);
+  }
+  free(p);
+  free(p2);
+  fclose(arq);
+  return 0;
+}
+
+-------------------------------------------------------------------------------
+
+//20
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void main(){
+  FILE *pp1;
+  int n_alunos, *notas, i, j, k, nota;
+  char **nomes, nome[40];
+
+  printf("Digite a quantidade de alunos na disciplina: \n");
+  scanf("%d",&n_alunos);
+  nomes = malloc(sizeof(char)*n_alunos);
+  for(i = 0; i < n_alunos;i++){
+    nomes[i] = malloc(sizeof(char)*40);
+  }
+  notas = malloc(sizeof(int)*n_alunos);
+  
+  for(i = 0; i < n_alunos;i++){
+    printf("Digite o nome de um aluno: \n");
+    fflush(stdin);
+    fgets(nome,40,stdin);
+    fflush(stdin);
+    printf("Digite a nota final do aluno: \n");
+    scanf("%d",&nota);
+    strcpy(nomes[i],nome);
+    k = strlen(nomes[i]);
+    for(j = k + 1; j < 40; j++){
+      nomes[i][j] = ' ';
+    }
+    nomes[i][strlen(nomes[i]) - 1] = ' '; 
+    notas[i] = nota;
+  }
+  pp1 = fopen("pplab1.txt","a");
+  for(i = 0; i < n_alunos;i++){
+    for(j = 0; j < 40; j++){
+      fprintf(pp1,"%c",nomes[i][j]);
+    }
+    fprintf(pp1,"%d\n",notas[i]);
+  }
+  fclose(pp1);
+  for(i = 0; i < n_alunos;i++){
+    free(nomes[i]);
+  }
+  free(notas);
+  nomes = NULL;
+  notas = NULL;
+  system("pause");
+}
